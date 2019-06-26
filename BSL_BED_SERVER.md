@@ -70,6 +70,30 @@ public void setCharacteristicNotification(BluetoothGattCharacteristic characteri
         }
 ```
 
+## 应用
+
+#### 获取控制器数据
+
+控制器发送的数据由函数 `onCharacteristicChanged()`接收后，通过`broadcastUpdate()`函数对接收
+的数据进行分析处理。最后进行呈现。
+
+onCharacteristicChanged()函数
+
+```java
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt,
+                                            BluetoothGattCharacteristic characteristic) {
+            broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
+        }
+```
+
+broadcastUpdate()函数
+
+```java
+    private void broadcastUpdate(final String action,
+                                 final BluetoothGattCharacteristic characteristic)
+```
+
 ## 参考
 
 UUID列表
