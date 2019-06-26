@@ -72,6 +72,52 @@ public void setCharacteristicNotification(BluetoothGattCharacteristic characteri
 
 ## 应用
 
+#### 设备列表子项响应
+
+当点特征列表向后，`DeviceControlActivity.java`中的`servicesListClickListner()`函数对选择的项目进行
+响应。
+
+函数流程：
+
+* 根据选择相应的项目，获取`Characteristics`信息
+* 根据`Characteristics`信息，提取`Properties`信息。该信息包含了`Characteristics`的权限信息。
+* 更具获得的权限，通过`setCharacteristicNotification()`函数对`Notify`进行使能
+* 设备端可以发送数据到Android。
+
+权限信息定义相见`BluetooothGattCharcteristic.java`文件。
+
+```java
+private final ExpandableListView.OnChildClickListener servicesListClickListner =
+            new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                            int childPosition, long id) {
+                    if (mGattCharacteristics != null) {
+                        final BluetoothGattCharacteristic characteristic =
+                                mGattCharacteristics.get(groupPosition).get(childPosition);
+                        final int charaProp = characteristic.getProperties();
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                            // If there is an active notification on a characteristic, clear
+                            // it first so it doesn't update the data field on the user interface.
+                            if (mNotifyCharacteristic != null) {
+                                mBluetoothLeService.setCharacteristicNotification(
+                                        mNotifyCharacteristic, false);
+                                mNotifyCharacteristic = null;
+                            }
+                            mBluetoothLeService.readCharacteristic(characteristic);
+                        }
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                            mNotifyCharacteristic = characteristic;
+                            mBluetoothLeService.setCharacteristicNotification(
+                                    characteristic, true);
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+    };
+```
+
 #### 获取控制器数据
 
 控制器发送的数据由函数 `onCharacteristicChanged()`接收后，通过`broadcastUpdate()`函数对接收
