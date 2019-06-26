@@ -26,6 +26,11 @@ public class SampleGattAttributes {
     public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
 
+    public static String BSL_BED_SERVER = "0000abf0-0000-1000-8000-00805f9b34fb";
+    public static String BED_DATA_RECV_CHAR = "0000abf1-0000-1000-8000-00805f9b34fb";
+    public static String BED_DATA_NOTIFY_CHAR = "0000abf2-0000-1000-8000-00805f9b34fb";
+    public static String BED_COMMAND_CHAR = "0000abf3-0000-1000-8000-00805f9b34fb";
+    public static String SPP_STATUS_CHAR = "0000abf4-0000-1000-8000-00805f9b34fb";
     static {
         // Sample Services.
         attributes.put("0000180d-0000-1000-8000-00805f9b34fb", "Heart Rate Service");
@@ -33,6 +38,13 @@ public class SampleGattAttributes {
         // Sample Characteristics.
         attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
         attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
+        // Bed Services
+        attributes.put(BSL_BED_SERVER, "BSL Bed Service");
+        // Bed Characteristics
+        attributes.put(BED_DATA_RECV_CHAR, "Bed Data Write");
+        attributes.put(BED_DATA_NOTIFY_CHAR, "Bed Data Notify");
+        attributes.put(BED_COMMAND_CHAR, "Bed Command");
+        attributes.put(SPP_STATUS_CHAR, "Bed Status");
     }
 
     public static String lookup(String uuid, String defaultName) {
