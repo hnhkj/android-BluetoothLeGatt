@@ -35,11 +35,13 @@ public class SampleGattAttributes {
         // Sample Services.
         attributes.put("0000180d-0000-1000-8000-00805f9b34fb", "Heart Rate Service");
         attributes.put("0000180a-0000-1000-8000-00805f9b34fb", "Device Information Service");
+
         // Sample Characteristics.
         attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
         attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
+
         // Bed Services
-        attributes.put(BSL_BED_SERVER, "BSL Bed Service");
+        attributes.put(BSL_BED_SERVER, "BSL Bed Server");
         // Bed Characteristics
         attributes.put(BED_DATA_RECV_CHAR, "Bed Data Write");
         attributes.put(BED_DATA_NOTIFY_CHAR, "Bed Data Notify");
