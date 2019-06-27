@@ -21,6 +21,17 @@
 
 ## 修改内容
 
+#### AndroidManifest.xml
+
+蓝牙扫描添加对`Android 60`以后的设备支持，在5.0之前，`Android`默认授予了位置权限，在之后的版本需要对`App`进行授权才可以使用蓝牙扫描代码。
+
+```
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-permission android:name="android.hardware.location.gps" />
+    <!-- Need if your app targets Android 6.0 or higher -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+```
+
 #### SampleGattAttributes.java
 
 * 添加控制器UUID
